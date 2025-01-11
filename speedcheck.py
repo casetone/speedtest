@@ -106,15 +106,15 @@ def main():
     test_and_send()
 
     # Change up the Virgin link to be higher priority by adding a routing table record with a lower metric
-    result = subprocess.run(["sudo ip route add default via 192.168.0.1 metric 102"], shell=True, capture_output=True, text=True)
-    result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
-    print(f"Server External IP address changed to : {result.stdout}")
+    #result = subprocess.run(["sudo ip route add default via 192.168.0.1 metric 102"], shell=True, capture_output=True, text=True)
+    #result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
+    #print(f"Server External IP address changed to : {result.stdout}")
 
-    test_and_send()
+    #test_and_send()
 
-    result = subprocess.run(["sudo ip route del default via 192.168.0.1 metric 102"], shell=True, capture_output=True, text=True)
-    result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
-    print(f"Server External IP address changed back to : {result.stdout}")
+    #result = subprocess.run(["sudo ip route del default via 192.168.0.1 metric 102"], shell=True, capture_output=True, text=True)
+    #result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
+    #print(f"Server External IP address changed back to : {result.stdout}")
 
 if __name__ == "__main__":
 
