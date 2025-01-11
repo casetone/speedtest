@@ -81,7 +81,7 @@ def request_post(data_payload):
     return r.text
 
 
-if __name__ == "__main__":
+def test_and_send():
 
     results = {}
 
@@ -92,7 +92,30 @@ if __name__ == "__main__":
 
     results["download_speed"], results["upload_speed"], results["isp"] = test_internet_speed()
     json_results = json.dumps(results) 
-    print(json_results)
+    #print(json_results)
 
     r = request_post(json_results)
-    print(f'INFO : Sent data payload with outcome - {json.loads(r)["text"]}')
+    #print(f'INFO : Sent data payload with outcome - {json.loads(r)["text"]}')
+
+
+def main():
+
+    result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
+    print(f"Server External IP address at start : {result.stdout}")
+
+    test_and_send()
+
+    # Change up the Virgin link to be higher priority by adding a routing table record with a lower metric
+    result = subprocess.run(["sudo ip route add default via 192.168.0.1 metric 102"], shell=True, capture_output=True, text=True)
+    result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
+    print(f"Server External IP address changed to : {result.stdout}")
+
+    test_and_send()
+
+    result = subprocess.run(["sudo ip route del default via 192.168.0.1 metric 102"], shell=True, capture_output=True, text=True)
+    result = subprocess.run(["curl ifconfig.me"], shell=True, capture_output=True, text=True)
+    print(f"Server External IP address changed back to : {result.stdout}")
+
+if __name__ == "__main__":
+
+    main()
