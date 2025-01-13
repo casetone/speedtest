@@ -13,3 +13,10 @@ set -Ux HEC_TOKEN_SPEEDTEST '<token>>'
 python -m venv venv
 source venv/bin/activate
 pip install speedtest-cli
+
+
+pipenv
+======
+https://github.com/pypa/pipenv
+
+pipenv run speckcheck.py
