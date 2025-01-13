@@ -8,3 +8,8 @@ sudo ip route add default via 192.168.0.1 metric 102
 sudo ip route del default via 192.168.0.1 metric 102
 
 set -Ux HEC_TOKEN_SPEEDTEST '<token>>'
+
+
+python -m venv venv
+source venv/bin/activate
+pip install speedtest-cli
